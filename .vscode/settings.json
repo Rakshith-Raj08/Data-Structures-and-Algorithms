@@ -1,5 +1,14 @@
 {
     "files.associations": {
-        "functional": "cpp"
+        "functional": "cpp",
+        "array": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "*.tcc": "cpp",
+        "unordered_map": "cpp",
+        "memory": "cpp",
+        "ostream": "cpp",
+        "streambuf": "cpp",
+        "tuple": "cpp"
     }
 }
