@@ -9,6 +9,16 @@
         "memory": "cpp",
         "ostream": "cpp",
         "streambuf": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
     }
 }
