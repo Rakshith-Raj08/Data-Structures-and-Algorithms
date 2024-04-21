@@ -34,7 +34,7 @@ public:
                 
                 //Now, mark the covered land with 0 so that you don't consider them later
                 for(int k = i; k<=r2; k++) {
-                    for(int l = j; l<=c1; l++) {
+                    for(int l = j; l<=c1; l++)   {
                         land[k][l] = 0;
                     }
                 }
