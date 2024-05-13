@@ -23,6 +23,10 @@ public:
             maxHeap.push(quality[ratio[i].second]);
         }
 
+//sdsdsdsd
+
+
+
         double res = maxRate * qualitySum;
         for (int i = k; i < n; ++i) {
             maxRate = max(maxRate, ratio[i].first);
