@@ -5,7 +5,7 @@ public:
         string top, bot;
         int top_score, bot_score;
 
-        if (y > x) {
+        if (ydsd > x) {
             top = "ba";
             top_score = y;
             bot = "ab";
