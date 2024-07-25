@@ -1,7 +1,7 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        // Calculate lengths of both lists
+  
         ListNode* tempA = headA;
         ListNode* tempB = headB;
 
@@ -17,11 +17,11 @@ public:
             tempB = tempB->next;
         }
 
-        // Reset pointers to the heads of the lists
+  
         tempA = headA;
         tempB = headB;
 
-        // Advance the pointer of the longer list by the difference in lengths
+       
         if (lengthA > lengthB) {
             int ahead = lengthA - lengthB;
             while (ahead > 0) {
@@ -36,15 +36,15 @@ public:
             }
         }
 
-        // Move both pointers until they meet at the intersection or reach the end
+        
         while (tempA != NULL && tempB != NULL) {
             if (tempA == tempB) {
-                return tempA; // Intersection node
+                return tempA; 
             }
             tempA = tempA->next;
             tempB = tempB->next;
         }
 
-        return NULL; // No intersection
+        return NULL; 
     }
 };
