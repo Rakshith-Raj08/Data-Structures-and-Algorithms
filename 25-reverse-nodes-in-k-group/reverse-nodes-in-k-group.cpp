@@ -8,41 +8,78 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+// Optimized Approach
+// Time complexity -> O(2n) ~ O(n) and Space -> O(1)
 class Solution {
-public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        if(head == NULL || k == 1)
-        return head;
-
-        ListNode* dummy = new ListNode(0);
-        dummy -> next = head;
-
-        ListNode* curr = dummy, *prev = dummy, *nex = dummy;
-        int count = 0;
-
-        
-        while(curr -> next)
+private:
+    // Helper function to reverse a linked list
+    ListNode* reverseLinkedList(ListNode *head) 
+    {
+        ListNode *currNode = head, *prevNode = nullptr, *nextNode;
+        while (currNode != nullptr) 
         {
-            curr = curr -> next;
-            count++;
+            nextNode = currNode->next;
+            currNode->next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
         }
+        return prevNode;
+    }
 
-        while(count >= k)
+    // Helper function to get the kth node from the current position
+    ListNode* getKthNode(ListNode *temp, int k) 
+    {
+        k -= 1;
+        while (temp != nullptr && k > 0) 
         {
-            curr = prev -> next;
-            nex = curr -> next;
+            k--;
+            temp = temp->next;
+        }
+        return temp;
+    }
 
-            for(int i = 1; i < k; i++)
+public:
+    // Function to reverse nodes in k-group in a linked list
+    ListNode* reverseKGroup(ListNode* head, int k) 
+    {
+        ListNode *temp = head, *prevNode = nullptr, *nextNode = nullptr;
+        // Iterate through the linked list
+        while (temp != nullptr) 
+        { 
+            // Get the kth node from the current position
+            ListNode *kthNode = getKthNode(temp, k);
+
+            // If kth node is not found, connect the remaining nodes to the previous group
+            if (kthNode == nullptr) 
             {
-                curr -> next = nex -> next;
-                nex -> next = prev -> next;
-                prev -> next = nex;
-                nex = curr -> next;
+                if (prevNode != nullptr) 
+                {
+                    prevNode->next = temp;
+                }
+                break;
             }
 
-            prev = curr;
-            count -= k;
+            // Save the next node after kth node
+            nextNode = kthNode->next;
+
+            // Disconnect the kth node from the rest of the list
+            kthNode->next = nullptr;
+
+            // Reverse the current k-group and update head if necessary
+            reverseLinkedList(temp);
+            if (temp == head) 
+            {
+                head = kthNode;
+            } else 
+            {
+                prevNode->next = kthNode;
+            }
+
+            // Update pointers for the next iteration
+            prevNode = temp;
+            temp = nextNode;
         }
-        return dummy -> next;
+        return head;
     }
 };
