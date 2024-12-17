@@ -5,41 +5,41 @@ using namespace std;
 
 // } Driver Code Ends
 // class implemented
-/*
+
 struct Item{
     int value;
     int weight;
 };
-*/
+
 
 class Solution {
-public:
-    
-    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
-        vector<pair<double, int>> a(val.size());
-
-        int j = 0;
-        double max = 0;
-        for(int i = 0; i < val.size(); i++) {
-            a[i] = { (double)val[i] / wt[i], wt[i] };
+  public:
+    bool static comp(Item a, Item b){
+        double x=(double) a.value/(double) a.weight;
+        double y=(double) b.value/(double) b.weight;
+        return x>y;
+    }
+    // Function to get the maximum total value in the knapsack.
+    double fractionalKnapsack(vector<int>& values, vector<int>& weights, int w) {
+        // Your code here
+        vector<Item> item;
+        for(int i=0;i<values.size();i++){
+            item.push_back({values[i],weights[i]});
         }
-
-        // Correctly closing the sort function's lambda and the `sort` call.
-        sort(a.begin(), a.end(), [](pair<double, int>& p1, pair<double, int>& p2) {
-            return p1.first > p2.first; // Sort by value-to-weight ratio in descending order
-        });//this function is requires here because we want in descending order instead of ascending order
-
-        while(capacity > 0 && j < a.size()) {    
-            if(capacity > a[j].second) {
-                max += a[j].first * a[j].second;
-                capacity -= a[j].second;
-            } else {
-                max += a[j].first * capacity;
-                capacity = 0;
+        
+        sort(item.begin(),item.end(),comp);
+        double ans=0;
+        for(int i=0;i<item.size();i++){
+            if(item[i].weight<=w){
+                ans+=item[i].value;
+                w-=item[i].weight;
             }
-            j++;
+            else{
+                ans+=((double)item[i].value/item[i].weight)*w;
+                break;
+            }
         }
-        return max;
+        return ans;
     }
 }; 
 
